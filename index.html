@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kimichi Digital Twin Elite | AI-Powered Customer Experience</title>
+    <title>ReplyMind_AI | AI-Powered Customer Experience</title>
     <style>
         /* ===== CSS RESET & BASE ===== */
         * {
@@ -130,84 +130,31 @@
             }
         }
 
-        /* ===== HERO SECTION - NEW ANIMATED VERSION ===== */
+        /* ===== HERO SECTION - UPDATED WITH NEW IMAGE ===== */
         .hero {
             height: 100vh;
             position: relative;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: flex-end;
+            justify-content: flex-start;
             overflow: hidden;
-            background: linear-gradient(180deg, 
-                #000000 0%, 
-                #0A0A0A 20%, 
-                #0A0A0A 50%, 
-                #0a0a2a 80%, 
-                #1C1CFF 100%
-            );
+            background: url('https://i.imgur.com/4EGYJ2K.jpeg') center/cover no-repeat;
         }
 
-        /* Animated background flow */
-        .hero-bg {
+        .hero::before {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        /* Flowing neon lines */
-        .flow-line {
-            position: absolute;
-            width: 200%;
-            height: 2px;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                var(--neon-blue) 25%, 
-                var(--electric-accent) 50%, 
-                var(--neon-blue) 75%, 
-                transparent 100%
+            background: linear-gradient(135deg, 
+                rgba(10, 10, 10, 0.85) 0%, 
+                rgba(10, 10, 10, 0.6) 40%, 
+                rgba(10, 10, 10, 0.4) 100%
             );
-            opacity: 0.3;
-            animation: flow-horizontal 8s linear infinite;
-            transform: rotate(-15deg);
-        }
-
-        .flow-line:nth-child(1) { top: 20%; animation-delay: 0s; }
-        .flow-line:nth-child(2) { top: 40%; animation-delay: -2s; }
-        .flow-line:nth-child(3) { top: 60%; animation-delay: -4s; }
-        .flow-line:nth-child(4) { top: 80%; animation-delay: -6s; }
-
-        @keyframes flow-horizontal {
-            0% { transform: translateX(-50%) rotate(-15deg); }
-            100% { transform: translateX(0%) rotate(-15deg); }
-        }
-
-        /* Vertical flow lines */
-        .flow-vertical {
-            position: absolute;
-            width: 2px;
-            height: 200%;
-            background: linear-gradient(180deg, 
-                transparent 0%, 
-                var(--neon-blue) 25%, 
-                var(--electric-accent) 50%, 
-                var(--neon-blue) 75%, 
-                transparent 100%
-            );
-            opacity: 0.2;
-            animation: flow-vertical 10s linear infinite;
-        }
-
-        .flow-vertical:nth-child(5) { left: 20%; animation-delay: 0s; }
-        .flow-vertical:nth-child(6) { left: 50%; animation-delay: -3s; }
-        .flow-vertical:nth-child(7) { left: 80%; animation-delay: -6s; }
-
-        @keyframes flow-vertical {
-            0% { transform: translateY(-50%); }
-            100% { transform: translateY(0%); }
+            z-index: 2;
         }
 
         /* Particle container */
@@ -217,7 +164,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            z-index: 2;
+            z-index: 3;
             overflow: hidden;
         }
 
@@ -237,20 +184,20 @@
             50% { opacity: 1; transform: scale(1); }
         }
 
-        /* Hero content with parallax */
+        /* Hero content - TOP RIGHT POSITIONED */
         .hero-content {
             position: relative;
-            z-index: 3;
-            padding: 2rem;
-            max-width: 900px;
-            text-align: center;
+            z-index: 4;
+            padding: 2rem 4rem 2rem 2rem;
+            max-width: 600px;
+            text-align: right;
             margin-top: 15vh;
-            transition: transform 0.1s ease-out;
+            margin-right: 5%;
         }
 
-        /* Hero Headline */
+        /* Hero Headline - NEW NAME */
         .hero-headline {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-size: clamp(2rem, 5vw, 3.5rem);
             font-weight: 800;
             margin-bottom: 0.5rem;
             background: linear-gradient(180deg, var(--white-glow) 0%, var(--neon-blue) 50%, var(--electric-accent) 100%);
@@ -292,7 +239,7 @@
             font-size: clamp(0.9rem, 2vw, 1.2rem);
             color: var(--text-light);
             letter-spacing: 1px;
-            opacity: 0.9;
+            opacity: 0.95;
             margin-bottom: 3rem;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
@@ -302,7 +249,7 @@
             display: flex;
             flex-wrap: wrap;
             gap: 1rem;
-            justify-content: center;
+            justify-content: flex-end;
             margin-top: 1rem;
         }
 
@@ -394,48 +341,6 @@
             opacity: 0;
             transition: opacity 0.3s ease;
             box-shadow: 0 0 10px var(--neon-blue);
-        }
-
-        /* Scroll indicator */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 3;
-            animation: bounce 2s ease-in-out infinite;
-        }
-
-        .scroll-indicator::before {
-            content: '';
-            width: 20px;
-            height: 30px;
-            border: 2px solid var(--neon-blue);
-            border-radius: 10px;
-            display: block;
-        }
-
-        .scroll-indicator::after {
-            content: '';
-            width: 4px;
-            height: 8px;
-            background: var(--neon-blue);
-            border-radius: 2px;
-            position: absolute;
-            top: 6px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: scroll-down 2s ease-in-out infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(10px); }
-        }
-
-        @keyframes scroll-down {
-            0% { opacity: 1; transform: translateX(-50%) translateY(0); }
-            100% { opacity: 0; transform: translateX(-50%) translateY(10px); }
         }
 
         /* ===== SECTION STYLES ===== */
@@ -941,9 +846,16 @@
                 cursor: auto;
             }
 
+            .hero {
+                align-items: center;
+                justify-content: flex-start;
+            }
+
             .hero-content {
-                margin-top: 12vh;
-                padding: 1.5rem;
+                margin: 12vh 1.5rem 0;
+                padding: 1rem;
+                text-align: center;
+                max-width: 100%;
             }
 
             .hero-headline {
@@ -953,6 +865,7 @@
             .hero-buttons {
                 flex-direction: column;
                 align-items: center;
+                justify-content: center;
             }
 
             .btn {
@@ -998,14 +911,6 @@
             .section-header h2 {
                 font-size: 2rem;
             }
-
-            .scroll-indicator {
-                display: none;
-            }
-
-            .flow-line, .flow-vertical {
-                opacity: 0.15;
-            }
         }
 
         /* ===== SCROLLBAR ===== */
@@ -1046,26 +951,15 @@
     <div class="cursor-trail" id="cursorTrail"></div>
     <div class="cursor-particle" id="cursorParticle"></div>
 
-    <!-- Hero Section - NEW ANIMATED VERSION -->
+    <!-- Hero Section - UPDATED WITH NEW NAME, IMAGE, AND POSITION -->
     <section class="hero" id="hero">
-        <!-- Animated background -->
-        <div class="hero-bg" id="heroBg">
-            <div class="flow-line"></div>
-            <div class="flow-line"></div>
-            <div class="flow-line"></div>
-            <div class="flow-line"></div>
-            <div class="flow-vertical"></div>
-            <div class="flow-vertical"></div>
-            <div class="flow-vertical"></div>
-        </div>
-        
         <!-- Particles container -->
         <div class="hero-particles" id="heroParticles"></div>
         
-        <!-- Hero content with parallax -->
+        <!-- Hero content - TOP RIGHT POSITIONED -->
         <div class="hero-content" id="heroContent">
-            <h1 class="hero-headline" id="heroHeadline">Connect With Us</h1>
-            <p class="hero-subheadline">Elevating Your Customer Experience to the Next Dimension</p>
+            <h1 class="hero-headline" id="heroHeadline">ReplyMind_AI</h1>
+            <p class="hero-subheadline">Connect With Us</p>
             <p class="hero-subheadline" style="font-size: 0.9rem; margin-top: -0.5rem; opacity: 0.85;">AI-powered Bots for Telegram, Gmail, Instagram, WhatsApp – Seamless, Smart, Elite.</p>
             <div class="hero-buttons">
                 <a href="https://t.me/KimichiDigitalTwinElite_bot" class="btn" target="_blank" id="telegramBtn">
@@ -1089,9 +983,6 @@
                 </a>
             </div>
         </div>
-        
-        <!-- Scroll indicator -->
-        <div class="scroll-indicator"></div>
     </section>
 
     <!-- About Section -->
@@ -1100,12 +991,12 @@
         <div class="about-content">
             <div class="about-text">
                 <h2>Who We Are</h2>
-                <p>At Kimichi Digital Twin Elite, we redefine how businesses communicate with their clients. Our AI-driven digital twins act as premium receptionists and sales assistants, automating responses across Telegram, Gmail, Instagram, and WhatsApp with unmatched precision and sophistication.</p>
+                <p>At ReplyMind_AI, we redefine how businesses communicate with their clients. Our AI-driven digital twins act as premium receptionists and sales assistants, automating responses across Telegram, Gmail, Instagram, and WhatsApp with unmatched precision and sophistication.</p>
                 <p>Founded with the vision of merging advanced AI technology with luxury digital experience, we craft solutions that not only respond – but engage, impress, and convert.</p>
                 <p>Our mission is to empower businesses to reach their clients in ways that are fast, smart, and distinctly elite.</p>
             </div>
             <div class="about-image">
-                <img src="https://i.imgur.com/26eQh79.jpeg" alt="CEO - Kimichi Digital Twin Elite" id="ceoImage">
+                <img src="https://i.imgur.com/26eQh79.jpeg" alt="CEO - ReplyMind_AI" id="ceoImage">
             </div>
         </div>
     </section>
@@ -1222,13 +1113,13 @@
 
     <!-- Sidebar Thumbnail -->
     <div class="sidebar-thumbnail">
-        <img src="https://i.imgur.com/4s6pW7i.jpeg" alt="Kimichi Digital Twin" id="sidebarImg">
+        <img src="https://i.imgur.com/4s6pW7i.jpeg" alt="ReplyMind_AI" id="sidebarImg">
     </div>
 
     <!-- Footer -->
     <footer id="footer">
         <div class="footer-content">
-            <div class="footer-logo">Kimichi Digital Twin Elite</div>
+            <div class="footer-logo">ReplyMind_AI</div>
             <p class="footer-tagline">AI-Powered Bots for Businesses</p>
             <div class="footer-links">
                 <a href="#hero">Home</a>
@@ -1237,7 +1128,7 @@
                 <a href="#connect">Contact</a>
             </div>
             <p class="footer-bottom">Telegram | Instagram | Gmail | WhatsApp</p>
-            <p class="footer-bottom" style="margin-top: 0.5rem; opacity: 0.6;">© 2026 Kimichi Digital Twin Elite. All rights reserved.</p>
+            <p class="footer-bottom" style="margin-top: 0.5rem; opacity: 0.6;">© 2026 ReplyMind_AI. All rights reserved.</p>
         </div>
     </footer>
 
@@ -1348,11 +1239,7 @@
         });
 
         // Particles glow more on scroll
-        let scrollGlow = 1;
         window.addEventListener('scroll', () => {
-            const scrollY = window.scrollY;
-            scrollGlow = 1 + Math.min(scrollY / 500, 1);
-            
             const particles = document.querySelectorAll('.hero .particle');
             particles.forEach(particle => {
                 particle.style.boxShadow = `0 0 ${Math.random() * 10 + 5}px var(--neon-blue)`;
@@ -1436,15 +1323,9 @@
         function initParallax() {
             const ceoImage = document.getElementById('ceoImage');
             const sidebarImg = document.getElementById('sidebarImg');
-            const heroContent = document.getElementById('heroContent');
 
             window.addEventListener('scroll', () => {
                 const scrolled = window.pageYOffset;
-
-                // Hero content moves slightly against scroll
-                if (heroContent) {
-                    heroContent.style.transform = `translateY(${scrolled * 0.15}px)`;
-                }
 
                 if (ceoImage) {
                     ceoImage.style.transform = `translateY(${scrolled * 0.1}px)`;
