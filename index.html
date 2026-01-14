@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kimichi Digital Twin Elite | AI-Powered Customer Experience</title>
+    <style>
+        /* ===== CSS RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark-bg: #0A0A0A;
+            --neon-blue: #00FFFF;
+            --electric-accent: #1C1CFF;
+            --white-glow: #FFFFFF;
+            --text-light: #E0E0E0;
+            --overlay-dark: rgba(10, 10, 10, 0.85);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* ===== CUSTOM CURSOR ===== */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--neon-blue);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            transition: transform 0.1s ease, width 0.2s, height 0.2s;
+            mix-blend-mode: difference;
+        }
+
+        .cursor.active {
+            width: 50px;
+            height: 50px;
+            border-color: var(--electric-accent);
+            background: rgba(0, 255, 255, 0.1);
+        }
+
+        .cursor-trail {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: var(--neon-blue);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.6;
+        }
+
+        /* ===== PARTICLE EFFECTS ===== */
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1;
+            animation: float-particle linear infinite;
+        }
+
+        @keyframes float-particle {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* ===== SECTION HEADERS ===== */
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            background: linear-gradient(135deg, var(--white-glow) 0%, var(--neon-blue) 50%, var(--electric-accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+
+        .section-header::before,
+        .section-header::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 100px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+        }
+
+        .section-header::before {
+            right: calc(50% + 150px);
+        }
+
+        .section-header::after {
+            left: calc(50% + 150px);
+        }
+
+        @media (max-width: 768px) {
+            .section-header::before,
+            .section-header::after {
+                display: none;
+            }
+        }
+
+        /* ===== HERO SECTION - NEW ANIMATED VERSION ===== */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+            background: linear-gradient(180deg, 
+                #000000 0%, 
+                #0A0A0A 20%, 
+                #0A0A0A 50%, 
+                #0a0a2a 80%, 
+                #1C1CFF 100%
+            );
+        }
+
+        /* Animated background flow */
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        /* Flowing neon lines */
+        .flow-line {
+            position: absolute;
+            width: 200%;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                var(--neon-blue) 25%, 
+                var(--electric-accent) 50%, 
+                var(--neon-blue) 75%, 
+                transparent 100%
+            );
+            opacity: 0.3;
+            animation: flow-horizontal 8s linear infinite;
+            transform: rotate(-15deg);
+        }
+
+        .flow-line:nth-child(1) { top: 20%; animation-delay: 0s; }
+        .flow-line:nth-child(2) { top: 40%; animation-delay: -2s; }
+        .flow-line:nth-child(3) { top: 60%; animation-delay: -4s; }
+        .flow-line:nth-child(4) { top: 80%; animation-delay: -6s; }
+
+        @keyframes flow-horizontal {
+            0% { transform: translateX(-50%) rotate(-15deg); }
+            100% { transform: translateX(0%) rotate(-15deg); }
+        }
+
+        /* Vertical flow lines */
+        .flow-vertical {
+            position: absolute;
+            width: 2px;
+            height: 200%;
+            background: linear-gradient(180deg, 
+                transparent 0%, 
+                var(--neon-blue) 25%, 
+                var(--electric-accent) 50%, 
+                var(--neon-blue) 75%, 
+                transparent 100%
+            );
+            opacity: 0.2;
+            animation: flow-vertical 10s linear infinite;
+        }
+
+        .flow-vertical:nth-child(5) { left: 20%; animation-delay: 0s; }
+        .flow-vertical:nth-child(6) { left: 50%; animation-delay: -3s; }
+        .flow-vertical:nth-child(7) { left: 80%; animation-delay: -6s; }
+
+        @keyframes flow-vertical {
+            0% { transform: translateY(-50%); }
+            100% { transform: translateY(0%); }
+        }
+
+        /* Particle container */
+        .hero-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        /* Sparkle particles */
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--neon-blue);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
+            animation: sparkle 2s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Hero content with parallax */
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            padding: 2rem;
+            max-width: 900px;
+            text-align: center;
+            margin-top: 15vh;
+            transition: transform 0.1s ease-out;
+        }
+
+        /* Hero Headline */
+        .hero-headline {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(180deg, var(--white-glow) 0%, var(--neon-blue) 50%, var(--electric-accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 
+                0 0 30px rgba(0, 255, 255, 0.3),
+                0 0 60px rgba(0, 255, 255, 0.2),
+                0 4px 8px rgba(0, 0, 0, 0.5);
+            animation: holo-glow 3s ease-in-out infinite;
+            position: relative;
+        }
+
+        @keyframes holo-glow {
+            0%, 100% {
+                filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.4));
+            }
+            50% {
+                filter: drop-shadow(0 0 40px rgba(0, 255, 255, 0.7)) drop-shadow(0 0 80px rgba(28, 28, 255, 0.3));
+            }
+        }
+
+        .hero-headline:hover {
+            animation: holo-pulse 0.5s ease-in-out infinite;
+        }
+
+        @keyframes holo-pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.02);
+            }
+        }
+
+        /* Subheadline */
+        .hero-subheadline {
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
+            color: var(--text-light);
+            letter-spacing: 1px;
+            opacity: 0.9;
+            margin-bottom: 3rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* CTA Buttons */
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.9rem 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            border: 2px solid var(--neon-blue);
+            background: rgba(0, 255, 255, 0.05);
+            color: var(--neon-blue);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            min-width: 200px;
+        }
+
+        .btn img {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+        }
+
+        .btn svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5), inset 0 0 30px rgba(0, 255, 255, 0.1);
+            transform: translateY(-3px) scale(1.05);
+            background: rgba(0, 255, 255, 0.15);
+        }
+
+        .btn:active {
+            transform: translateY(-1px) scale(1.02);
+        }
+
+        .btn-spark {
+            position: absolute;
+            pointer-events: none;
+            width: 4px;
+            height: 4px;
+            background: var(--neon-blue);
+            border-radius: 50%;
+            animation: spark 0.6s ease-out forwards;
+        }
+
+        @keyframes spark {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--spark-x), var(--spark-y)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* Cursor-follow particles */
+        .cursor-particle {
+            position: fixed;
+            width: 6px;
+            height: 6px;
+            background: var(--neon-blue);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .scroll-indicator::before {
+            content: '';
+            width: 20px;
+            height: 30px;
+            border: 2px solid var(--neon-blue);
+            border-radius: 10px;
+            display: block;
+        }
+
+        .scroll-indicator::after {
+            content: '';
+            width: 4px;
+            height: 8px;
+            background: var(--neon-blue);
+            border-radius: 2px;
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: scroll-down 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        @keyframes scroll-down {
+            0% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            100% { opacity: 0; transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* ===== SECTION STYLES ===== */
+        section {
+            position: relative;
+            padding: 6rem 2rem;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* ===== ABOUT SECTION ===== */
+        .about {
+            background: url('https://i.imgur.com/MuXlczi.jpeg') center/cover no-repeat;
+            position: relative;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, rgba(10, 10, 10, 0.92) 0%, rgba(10, 10, 10, 0.85) 50%, rgba(28, 28, 255, 0.1) 100%);
+            z-index: 1;
+        }
+
+        .about-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            padding: 2rem;
+        }
+
+        .about-text h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--white-glow) 0%, var(--neon-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+        }
+
+        .about-image {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .about-image img {
+            max-width: 400px;
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 0 60px rgba(0, 255, 255, 0.3);
+            animation: float-parallax 6s ease-in-out infinite;
+            border: 2px solid rgba(0, 255, 255, 0.3);
+        }
+
+        @keyframes float-parallax {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .holographic-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .holo-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+            animation: holo-scan 4s linear infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes holo-scan {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        /* ===== SERVICES SECTION ===== */
+        .services {
+            background: 
+                linear-gradient(180deg, rgba(10, 10, 10, 0.98) 0%, rgba(10, 10, 10, 0.95) 100%),
+                repeating-linear-gradient(0deg, transparent, transparent 50px, rgba(0, 255, 255, 0.03) 50px, rgba(0, 255, 255, 0.03) 51px),
+                repeating-linear-gradient(90deg, transparent, transparent 50px, rgba(0, 255, 255, 0.03) 50px, rgba(0, 255, 255, 0.03) 51px);
+            position: relative;
+        }
+
+        .services-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: linear-gradient(145deg, rgba(0, 255, 255, 0.05) 0%, rgba(28, 28, 255, 0.1) 100%);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transform-style: preserve-3d;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--electric-accent));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(0, 255, 255, 0.2), 0 0 40px rgba(28, 28, 255, 0.1);
+            border-color: var(--neon-blue);
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--white-glow);
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* ===== HOW IT WORKS SECTION ===== */
+        .how-it-works {
+            background: linear-gradient(180deg, rgba(10, 10, 10, 0.98) 0%, rgba(10, 10, 10, 0.95) 100%);
+            position: relative;
+        }
+
+        .steps-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .steps-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 3rem;
+            position: relative;
+        }
+
+        .steps-flow::before {
+            content: '';
+            position: absolute;
+            top: 50px;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), var(--electric-accent), transparent);
+            z-index: 0;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 200px;
+            max-width: 280px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .step.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(145deg, var(--neon-blue) 0%, var(--electric-accent) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--dark-bg);
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .step:hover .step-number {
+            transform: scale(1.1);
+            box-shadow: 0 0 50px rgba(0, 255, 255, 0.6);
+        }
+
+        .step h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--white-glow);
+        }
+
+        .step p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* ===== CONNECT SECTION ===== */
+        .connect {
+            background: linear-gradient(180deg, rgba(10, 10, 10, 0.98) 0%, rgba(28, 28, 255, 0.1) 50%, rgba(10, 10, 10, 0.98) 100%);
+            text-align: center;
+            position: relative;
+        }
+
+        .connect::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(0, 255, 255, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .connect-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .connect-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+
+        .connect-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .connect-btn {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.25rem 2rem;
+            background: linear-gradient(145deg, rgba(0, 255, 255, 0.1) 0%, rgba(28, 28, 255, 0.05) 100%);
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            border-radius: 10px;
+            color: var(--white-glow);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            min-width: 280px;
+        }
+
+        .connect-btn img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+
+        .connect-btn svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .connect-btn:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.3);
+            transform: translateY(-5px);
+            background: linear-gradient(145deg, rgba(0, 255, 255, 0.15) 0%, rgba(28, 28, 255, 0.1) 100%);
+        }
+
+        .connect-btn .text {
+            text-align: left;
+        }
+
+        .connect-btn .label {
+            font-size: 0.75rem;
+            color: var(--neon-blue);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .connect-btn .handle {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        /* ===== SIDEBAR THUMBNAIL ===== */
+        .sidebar-thumbnail {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 120px;
+            height: 120px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+            opacity: 0.8;
+            transition: all 0.3s ease;
+            z-index: 100;
+            animation: sidebar-float 4s ease-in-out infinite;
+        }
+
+        .sidebar-thumbnail:hover {
+            opacity: 1;
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+        }
+
+        .sidebar-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes sidebar-float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--dark-bg);
+            border-top: 1px solid rgba(0, 255, 255, 0.2);
+            padding: 4rem 2rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--white-glow) 0%, var(--neon-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-tagline {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--neon-blue);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--white-glow);
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0, 255, 255, 0.1);
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .spark {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--neon-blue);
+            border-radius: 50%;
+            animation: sparkle 2s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 992px) {
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .about-image {
+                order: -1;
+            }
+
+            .about-image img {
+                max-width: 300px;
+            }
+
+            .steps-flow::before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cursor, .cursor-trail, .cursor-particle {
+                display: none;
+            }
+
+            body {
+                cursor: auto;
+            }
+
+            .hero-content {
+                margin-top: 12vh;
+                padding: 1.5rem;
+            }
+
+            .hero-headline {
+                font-size: clamp(1.8rem, 5vw, 2.5rem);
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 320px;
+                justify-content: center;
+                padding: 0.8rem 1.2rem;
+            }
+
+            .btn img, .btn svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .connect-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .connect-btn {
+                width: 100%;
+                max-width: 320px;
+                justify-content: flex-start;
+                padding: 1rem 1.5rem;
+            }
+
+            .connect-btn img, .connect-btn svg {
+                width: 28px;
+                height: 28px;
+            }
+
+            .sidebar-thumbnail {
+                width: 80px;
+                height: 80px;
+                bottom: 20px;
+                right: 20px;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .scroll-indicator {
+                display: none;
+            }
+
+            .flow-line, .flow-vertical {
+                opacity: 0.15;
+            }
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--neon-blue), var(--electric-accent));
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--neon-blue);
+        }
+
+        /* ===== UTILITY CLASSES ===== */
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-2 {
+            margin-bottom: 2rem;
+        }
+
+        .mb-3 {
+            margin-bottom: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-trail" id="cursorTrail"></div>
+    <div class="cursor-particle" id="cursorParticle"></div>
+
+    <!-- Hero Section - NEW ANIMATED VERSION -->
+    <section class="hero" id="hero">
+        <!-- Animated background -->
+        <div class="hero-bg" id="heroBg">
+            <div class="flow-line"></div>
+            <div class="flow-line"></div>
+            <div class="flow-line"></div>
+            <div class="flow-line"></div>
+            <div class="flow-vertical"></div>
+            <div class="flow-vertical"></div>
+            <div class="flow-vertical"></div>
+        </div>
+        
+        <!-- Particles container -->
+        <div class="hero-particles" id="heroParticles"></div>
+        
+        <!-- Hero content with parallax -->
+        <div class="hero-content" id="heroContent">
+            <h1 class="hero-headline" id="heroHeadline">Connect With Us</h1>
+            <p class="hero-subheadline">Elevating Your Customer Experience to the Next Dimension</p>
+            <p class="hero-subheadline" style="font-size: 0.9rem; margin-top: -0.5rem; opacity: 0.85;">AI-powered Bots for Telegram, Gmail, Instagram, WhatsApp – Seamless, Smart, Elite.</p>
+            <div class="hero-buttons">
+                <a href="https://t.me/KimichiDigitalTwinElite_bot" class="btn" target="_blank" id="telegramBtn">
+                    <img src="https://i.imgur.com/5JVGiNw.jpeg" alt="Telegram">
+                    <span>@KimichiDigitalTwinElite_bot</span>
+                </a>
+                <a href="https://instagram.com/replymindai" class="btn" target="_blank" id="instagramBtn">
+                    <img src="https://i.imgur.com/HBGdBiC.jpeg" alt="Instagram">
+                    <span>@replymindai</span>
+                </a>
+                <a href="mailto:replyrindai@gmail.com" class="btn" id="emailBtn">
+                    <img src="https://i.imgur.com/2zO0FPl.jpeg" alt="Gmail">
+                    <span>replyrindai@gmail.com</span>
+                </a>
+                <a href="https://wa.me/491777952971" class="btn" target="_blank" id="whatsappBtn">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17.472 14.382C15.489 13.438 13.121 13.5 12.5 13.5C9.5 13.5 6.5 10.5 6.5 7.5C6.5 5.5 7.5 3.5 9.5 2.5C10.5 2 11.5 1.5 12.5 1.5C13.5 1.5 14.5 2 15.5 2.5C16.5 3 17.5 4 18 5C19.5 8 20 10.5 18.5 13.5C18 14.5 17.5 14 17.472 14.382Z" stroke="#00FFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M9.5 7.5C10.3284 7.5 11 6.82843 11 6C11 5.17157 10.3284 4.5 9.5 4.5C8.67157 4.5 8 5.17157 8 6C8 6.82843 8.67157 7.5 9.5 7.5Z" fill="#00FFFF"/>
+                    </svg>
+                    <span>+49 177 7952971</span>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="scroll-indicator"></div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="holographic-lines" id="holoLines"></div>
+        <div class="about-content">
+            <div class="about-text">
+                <h2>Who We Are</h2>
+                <p>At Kimichi Digital Twin Elite, we redefine how businesses communicate with their clients. Our AI-driven digital twins act as premium receptionists and sales assistants, automating responses across Telegram, Gmail, Instagram, and WhatsApp with unmatched precision and sophistication.</p>
+                <p>Founded with the vision of merging advanced AI technology with luxury digital experience, we craft solutions that not only respond – but engage, impress, and convert.</p>
+                <p>Our mission is to empower businesses to reach their clients in ways that are fast, smart, and distinctly elite.</p>
+            </div>
+            <div class="about-image">
+                <img src="https://i.imgur.com/26eQh79.jpeg" alt="CEO - Kimichi Digital Twin Elite" id="ceoImage">
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="services-container">
+            <div class="section-header">
+                <h2>What We Offer</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card" data-tilt>
+                    <span class="service-icon">🤖</span>
+                    <h3>Telegram AI Bots</h3>
+                    <p>Automates client interaction on Telegram with intelligent responses that feel human and professional.</p>
+                </div>
+                <div class="service-card" data-tilt>
+                    <span class="service-icon">📧</span>
+                    <h3>Instagram & Gmail Integration</h3>
+                    <p>Seamlessly connects and replies to messages across multiple platforms from one unified dashboard.</p>
+                </div>
+                <div class="service-card" data-tilt>
+                    <span class="service-icon">💬</span>
+                    <h3>WhatsApp Integration</h3>
+                    <p>Reach your clients instantly on their favorite chat platform with personalized AI responses.</p>
+                </div>
+                <div class="service-card" data-tilt>
+                    <span class="service-icon">🎯</span>
+                    <h3>24/7 Elite Support</h3>
+                    <p>Always online AI, trained to convert leads and provide exceptional customer service around the clock.</p>
+                </div>
+                <div class="service-card" data-tilt>
+                    <span class="service-icon">⚡</span>
+                    <h3>Custom Bot Solutions</h3>
+                    <p>Tailored bots designed specifically for your unique business needs and industry requirements.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="howItWorks">
+        <div class="steps-container">
+            <div class="section-header">
+                <h2>How It Works</h2>
+            </div>
+            <div class="steps-flow">
+                <div class="step" data-animate>
+                    <div class="step-number">1</div>
+                    <h3>Connect</h3>
+                    <p>Select your platform (Telegram, Gmail, Instagram, WhatsApp) and integrate with our seamless API.</p>
+                </div>
+                <div class="step" data-animate>
+                    <div class="step-number">2</div>
+                    <h3>Customize</h3>
+                    <p>Tailor your AI bot to match your brand voice and specific business requirements.</p>
+                </div>
+                <div class="step" data-animate>
+                    <div class="step-number">3</div>
+                    <h3>Launch</h3>
+                    <p>Go live instantly with your AI assistant and start engaging with customers immediately.</p>
+                </div>
+                <div class="step" data-animate>
+                    <div class="step-number">4</div>
+                    <h3>Engage & Grow</h3>
+                    <p>Let AI handle clients, track metrics, and increase conversions automatically.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Connect Section -->
+    <section class="connect" id="connect">
+        <div class="connect-container">
+            <div class="section-header">
+                <h2>Connect With Us</h2>
+            </div>
+            <p class="connect-subtitle">Ready to elevate your customer experience? Choose your preferred channel:</p>
+            <div class="connect-buttons">
+                <a href="https://t.me/KimichiDigitalTwinElite_bot" class="connect-btn" target="_blank">
+                    <img src="https://i.imgur.com/5JVGiNw.jpeg" alt="Telegram">
+                    <span class="text">
+                        <span class="label">Telegram</span>
+                        <span class="handle">@KimichiDigitalTwinElite_bot</span>
+                    </span>
+                </a>
+                <a href="https://instagram.com/replymindai" class="connect-btn" target="_blank">
+                    <img src="https://i.imgur.com/HBGdBiC.jpeg" alt="Instagram">
+                    <span class="text">
+                        <span class="label">Instagram</span>
+                        <span class="handle">@replymindai</span>
+                    </span>
+                </a>
+                <a href="mailto:replyrindai@gmail.com" class="connect-btn">
+                    <img src="https://i.imgur.com/2zO0FPl.jpeg" alt="Gmail">
+                    <span class="text">
+                        <span class="label">Email</span>
+                        <span class="handle">replyrindai@gmail.com</span>
+                    </span>
+                </a>
+                <a href="https://wa.me/491777952971" class="connect-btn" target="_blank">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17.472 14.382C15.489 13.438 13.121 13.5 12.5 13.5C9.5 13.5 6.5 10.5 6.5 7.5C6.5 5.5 7.5 3.5 9.5 2.5C10.5 2 11.5 1.5 12.5 1.5C13.5 1.5 14.5 2 15.5 2.5C16.5 3 17.5 4 18 5C19.5 8 20 10.5 18.5 13.5C18 14.5 17.5 14 17.472 14.382Z" stroke="#00FFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M9.5 7.5C10.3284 7.5 11 6.82843 11 6C11 5.17157 10.3284 4.5 9.5 4.5C8.67157 4.5 8 5.17157 8 6C8 6.82843 8.67157 7.5 9.5 7.5Z" fill="#00FFFF"/>
+                    </svg>
+                    <span class="text">
+                        <span class="label">WhatsApp</span>
+                        <span class="handle">+49 177 7952971</span>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sidebar Thumbnail -->
+    <div class="sidebar-thumbnail">
+        <img src="https://i.imgur.com/4s6pW7i.jpeg" alt="Kimichi Digital Twin" id="sidebarImg">
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="footer-content">
+            <div class="footer-logo">Kimichi Digital Twin Elite</div>
+            <p class="footer-tagline">AI-Powered Bots for Businesses</p>
+            <div class="footer-links">
+                <a href="#hero">Home</a>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#connect">Contact</a>
+            </div>
+            <p class="footer-bottom">Telegram | Instagram | Gmail | WhatsApp</p>
+            <p class="footer-bottom" style="margin-top: 0.5rem; opacity: 0.6;">© 2026 Kimichi Digital Twin Elite. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ===== CUSTOM CURSOR =====
+        const cursor = document.getElementById('cursor');
+        const cursorTrail = document.getElementById('cursorTrail');
+        const cursorParticle = document.getElementById('cursorParticle');
+        let trailPositions = [];
+        const trailLength = 10;
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX - 10 + 'px';
+            cursor.style.top = e.clientY - 10 + 'px';
+
+            trailPositions.unshift({ x: e.clientX, y: e.clientY });
+            if (trailPositions.length > trailLength) {
+                trailPositions.pop();
+            }
+
+            updateTrail();
+            
+            // Cursor particle follow
+            cursorParticle.style.left = e.clientX - 3 + 'px';
+            cursorParticle.style.top = e.clientY - 3 + 'px';
+            cursorParticle.style.opacity = '1';
+        });
+
+        function updateTrail() {
+            cursorTrail.style.left = (trailPositions[trailPositions.length - 1]?.x || 0) - 4 + 'px';
+            cursorTrail.style.top = (trailPositions[trailPositions.length - 1]?.y || 0) - 4 + 'px';
+        }
+
+        // Hide cursor particle when not moving
+        let cursorTimeout;
+        document.addEventListener('mousemove', () => {
+            clearTimeout(cursorTimeout);
+            cursorTimeout = setTimeout(() => {
+                cursorParticle.style.opacity = '0';
+            }, 100);
+        });
+
+        // Cursor hover effects
+        const interactiveElements = document.querySelectorAll('a, button, .service-card, .step');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('active'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+        });
+
+        // ===== HERO PARTICLES WITH CURSOR INTERACTION =====
+        function createHeroParticles() {
+            const container = document.getElementById('heroParticles');
+            const particleCount = 40;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                particle.style.width = Math.random() * 4 + 2 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.background = Math.random() > 0.5 ? 'var(--neon-blue)' : 'var(--electric-accent)';
+                particle.style.borderRadius = '50%';
+                particle.style.boxShadow = `0 0 ${Math.random() * 10 + 5}px var(--neon-blue)`;
+                particle.dataset.baseOpacity = Math.random() * 0.5 + 0.3;
+                particle.style.opacity = particle.dataset.baseOpacity;
+                container.appendChild(particle);
+            }
+
+            // Create sparkle effects
+            for (let i = 0; i < 15; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(sparkle);
+            }
+        }
+
+        // Particles respond to cursor
+        document.getElementById('hero').addEventListener('mousemove', (e) => {
+            const particles = document.querySelectorAll('.particle');
+            const rect = document.getElementById('hero').getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+
+            particles.forEach(particle => {
+                const particleRect = particle.getBoundingClientRect();
+                const particleX = particleRect.left - rect.left;
+                const particleY = particleRect.top - rect.top;
+                const distance = Math.sqrt(Math.pow(mouseX - particleX, 2) + Math.pow(mouseY - particleY, 2));
+                const maxDistance = 200;
+
+                if (distance < maxDistance) {
+                    const force = (maxDistance - distance) / maxDistance;
+                    const angle = Math.atan2(particleY - mouseY, particleX - mouseX);
+                    const moveX = Math.cos(angle) * force * 20;
+                    const moveY = Math.sin(angle) * force * 20;
+                    particle.style.transform = `translate(${moveX}px, ${moveY}px)`;
+                    particle.style.opacity = Math.min(1, parseFloat(particle.dataset.baseOpacity) + force * 0.5);
+                } else {
+                    particle.style.transform = 'translate(0, 0)';
+                    particle.style.opacity = particle.dataset.baseOpacity;
+                }
+            });
+        });
+
+        // Particles glow more on scroll
+        let scrollGlow = 1;
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            scrollGlow = 1 + Math.min(scrollY / 500, 1);
+            
+            const particles = document.querySelectorAll('.hero .particle');
+            particles.forEach(particle => {
+                particle.style.boxShadow = `0 0 ${Math.random() * 10 + 5}px var(--neon-blue)`;
+            });
+        });
+
+        // ===== BUTTON SPARK EFFECTS =====
+        function createSpark(button) {
+            button.addEventListener('click', (e) => {
+                const spark = document.createElement('span');
+                spark.className = 'btn-spark';
+                const x = e.clientX - button.getBoundingClientRect().left;
+                const y = e.clientY - button.getBoundingClientRect().top;
+                const angle = Math.random() * Math.PI * 2;
+                const distance = Math.random() * 100 + 50;
+                spark.style.left = x + 'px';
+                spark.style.top = y + 'px';
+                spark.style.setProperty('--spark-x', Math.cos(angle) * distance + 'px');
+                spark.style.setProperty('--spark-y', Math.sin(angle) * distance + 'px');
+                button.appendChild(spark);
+                setTimeout(() => spark.remove(), 600);
+            });
+        }
+
+        document.querySelectorAll('.btn, .connect-btn').forEach(createSpark);
+
+        // ===== HOLOGRAPHIC LINES =====
+        function createHoloLines() {
+            const container = document.getElementById('holoLines');
+            for (let i = 0; i < 6; i++) {
+                const line = document.createElement('div');
+                line.className = 'holo-line';
+                line.style.top = Math.random() * 100 + '%';
+                line.style.left = '0';
+                line.style.width = '100%';
+                line.style.animationDelay = Math.random() * 4 + 's';
+                container.appendChild(line);
+            }
+        }
+
+        // ===== SERVICE CARD TILT EFFECT =====
+        function initTiltCards() {
+            const cards = document.querySelectorAll('.service-card[data-tilt]');
+
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 20;
+                    const rotateY = (centerX - x) / 20;
+
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px) scale(1.02)`;
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0) scale(1)';
+                });
+            });
+        }
+
+        // ===== STEP ANIMATION ON SCROLL =====
+        function initStepAnimation() {
+            const steps = document.querySelectorAll('.step[data-animate]');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, index * 200);
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            steps.forEach(step => observer.observe(step));
+        }
+
+        // ===== PARALLAX EFFECT =====
+        function initParallax() {
+            const ceoImage = document.getElementById('ceoImage');
+            const sidebarImg = document.getElementById('sidebarImg');
+            const heroContent = document.getElementById('heroContent');
+
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+
+                // Hero content moves slightly against scroll
+                if (heroContent) {
+                    heroContent.style.transform = `translateY(${scrolled * 0.15}px)`;
+                }
+
+                if (ceoImage) {
+                    ceoImage.style.transform = `translateY(${scrolled * 0.1}px)`;
+                }
+
+                if (sidebarImg) {
+                    sidebarImg.parentElement.style.transform = `translateY(${scrolled * 0.05}px)`;
+                }
+            });
+        }
+
+        // ===== FOOTER SPARKS =====
+        function createFooterSparks() {
+            const footer = document.getElementById('footer');
+            for (let i = 0; i < 25; i++) {
+                const spark = document.createElement('div');
+                spark.className = 'spark';
+                spark.style.left = Math.random() * 100 + '%';
+                spark.style.top = Math.random() * 100 + '%';
+                spark.style.animationDelay = Math.random() * 2 + 's';
+                footer.appendChild(spark);
+            }
+        }
+
+        // ===== SMOOTH SCROLL =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // ===== INITIALIZE ALL =====
+        document.addEventListener('DOMContentLoaded', () => {
+            createHeroParticles();
+            createHoloLines();
+            initTiltCards();
+            initStepAnimation();
+            initParallax();
+            createFooterSparks();
+        });
+    </script>
+</body>
+</html>
